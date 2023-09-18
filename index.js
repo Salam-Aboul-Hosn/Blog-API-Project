@@ -47,6 +47,11 @@ app.get('/posts', (req, res) => {
 
 //CHALLENGE 2: GET a specific post by id
 
+app.get('/posts/:id', (req, res) => {
+  const id = req.params.id;
+  const index = id - 1;
+  res.send(posts[index]);
+});
 //CHALLENGE 3: POST a new post
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
