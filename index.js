@@ -38,8 +38,6 @@ let lastId = 3;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Write your code here//
-
 app.get('/posts', (req, res) => {
   res.send(posts);
 });
