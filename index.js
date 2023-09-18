@@ -67,7 +67,21 @@ app.post('/posts', (req, res) => {
 });
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
+app.patch('/posts/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = posts.findIndex((element) => element.id === id);
+  const element = posts[index];
+  const updatedPost = {
+    id: id,
+    title: req.body.title || element.title,
+    content: req.body.content || element.content,
+    author: req.body.author || element.author,
+    date: element.date,
+  };
 
+  posts[index] = updatedPost;
+  res.send(updatedPost);
+});
 //CHALLENGE 5: DELETE a specific post by providing the post id.
 
 app.listen(port, () => {
