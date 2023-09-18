@@ -55,13 +55,15 @@ app.get('/posts/:id', (req, res) => {
 //CHALLENGE 3: POST a new post
 
 app.post('/posts', (req, res) => {
+  const newId = (lastId += 1);
   const newPost = {
-    id: posts.length + 1,
+    id: newId,
     title: req.body.title,
     content: req.body.content,
     author: req.body.author,
     date: new Date(),
   };
+  lastId = newId;
   posts.push(newPost);
   res.send(newPost);
 });
@@ -83,7 +85,13 @@ app.patch('/posts/:id', (req, res) => {
   res.send(updatedPost);
 });
 //CHALLENGE 5: DELETE a specific post by providing the post id.
+app.delete('/posts/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = posts.findIndex((post) => post.id === id);
+  posts.splice(index, 1);
 
+  res.sendStatus(200);
+});
 app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
 });
